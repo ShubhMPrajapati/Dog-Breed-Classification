@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: dog-vision
+    name: Dog-Breed-Classification
     env: python
     buildCommand: |
       pip install --upgrade pip setuptools wheel
