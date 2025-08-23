@@ -7,15 +7,23 @@ from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.mobilenet_v2 import preprocess_input, MobileNetV2
 from keras.saving import register_keras_serializable
 
+# -------------------------------
+# Upload folder
+# -------------------------------
 UPLOAD_FOLDER = "static/uploaded"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
+# -------------------------------
+# Keras serializable (if needed)
+# -------------------------------
 @register_keras_serializable()
 def apply_feature_extractor(x):
     x = preprocess_input(x)
     return x
 
-# Paths to model and labels
+# -------------------------------
+# Model & labels paths
+# -------------------------------
 MODEL_KERAS = "static/model/dog_model.keras"
 MODEL_H5 = "static/model/dog_model.h5"
 MODEL_FOLDER = "static/model"
@@ -23,7 +31,9 @@ MODEL_FOLDER = "static/model"
 with open("static/model/dog_breeds.json", "r") as f:
     class_labels = json.load(f)
 
+# -------------------------------
 # Load trained classifier model
+# -------------------------------
 model = None
 if os.path.isfile(MODEL_KERAS):
     print("Loading model from .keras format...")
@@ -39,7 +49,9 @@ else:
         "No valid model found! Please save as .keras, .h5, or SavedModel format."
     )
 
-# Load feature extractor (must match training)
+# -------------------------------
+# Load feature extractor (MobileNetV2)
+# -------------------------------
 feature_extractor = MobileNetV2(
     weights="imagenet",
     include_top=False,
@@ -47,6 +59,9 @@ feature_extractor = MobileNetV2(
     input_shape=(224, 224, 3)
 )
 
+# -------------------------------
+# Flask app setup
+# -------------------------------
 app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
@@ -60,16 +75,16 @@ def index():
             filepath = os.path.join(UPLOAD_FOLDER, file.filename)
             file.save(filepath)
 
-            # Preprocess and extract features
+            # Preprocess image
             img = image.load_img(filepath, target_size=(224, 224))
             img_array = image.img_to_array(img)
             img_array = np.expand_dims(img_array, axis=0)
             img_array = preprocess_input(img_array)
 
-            # Extract features
+            # Extract features using MobileNetV2
             features = feature_extractor.predict(img_array)
 
-            # Predict breed
+            # Predict using your classifier
             preds = model.predict(features)
             class_idx = np.argmax(preds, axis=1)[0]
             breed_name = class_labels[class_idx]
@@ -79,6 +94,9 @@ def index():
 
     return render_template("index.html", prediction=prediction, img_path=img_path)
 
+# -------------------------------
+# Run Flask app on Render
+# -------------------------------
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=False)
