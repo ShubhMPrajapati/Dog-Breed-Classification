@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: dog-vision
+    env: python
+    buildCommand: |
+      pip install --upgrade pip setuptools wheel
+      pip install --only-binary :all: -r requirements.txt
+    startCommand: gunicorn app:app
+    plan: free
+    region: oregon
