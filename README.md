@@ -25,9 +25,3 @@ It leverages **TensorFlow**, **Keras**, and **Transfer Learning** with pretraine
 ## 📂 Project Structure
 - `dog_vision.html` → Jupyter Notebook (exported to HTML) containing the full workflow.  
 - Data preprocessing, model creation, training, and evaluation steps are documented.  
-
-## 📸 Example
-```python
-# Load and preprocess images
-# Train and evaluate model
-# Predict dog breed from new images
