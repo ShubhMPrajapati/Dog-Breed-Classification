@@ -20,12 +20,13 @@ def apply_feature_extractor(x):
     return feature_extractor_model(x)
 
 # Model file paths
-MODEL_KERAS = "model/dog_model.keras"
-MODEL_H5 = "model/dog_model.h5"
-MODEL_FOLDER = "model"
-
+MODEL_KERAS = "static/model/dog_model.keras"
+MODEL_H5 = "static/model/dog_model.h5"
+MODEL_FOLDER = "static/model"
+##
+print()
 # Load class labels
-with open("model/dog_breeds.json", "r") as f:
+with open("static/model/dog_breeds.json", "r") as f:
     class_labels = json.load(f)
 
 # Load the model
