@@ -1,10 +1,10 @@
 services:
   - type: web
-    name: Dog-Breed-Classification
+    name: dog-breed-classifier
     env: python
-    buildCommand: |
-      pip install --upgrade pip setuptools wheel
-      pip install --only-binary :all: -r requirements.txt
-    startCommand: gunicorn app:app
     plan: free
-    region: oregon
+    buildCommand: pip install --upgrade pip setuptools wheel && pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: PORT
+        value: 10000
