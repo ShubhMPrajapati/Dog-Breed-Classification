@@ -37,13 +37,13 @@ with open("static/model/dog_breeds.json", "r") as f:
 model = None
 if os.path.isfile(MODEL_KERAS):
     print("Loading model from .keras format...")
-    model = tf.keras.models.load_model(MODEL_KERAS)
+    model = tf.keras.models.load_model(MODEL_KERAS, compile=False)
 elif os.path.isfile(MODEL_H5):
     print("Loading model from .h5 format...")
     model = tf.keras.models.load_model(MODEL_H5, compile=False)
 elif os.path.isdir(MODEL_FOLDER) and os.path.isfile(os.path.join(MODEL_FOLDER, "saved_model.pb")):
     print("Loading model from SavedModel format...")
-    model = tf.keras.models.load_model(MODEL_FOLDER)
+    model = tf.keras.models.load_model(MODEL_FOLDER, compile=False)
 else:
     raise FileNotFoundError(
         "No valid model found! Please save as .keras, .h5, or SavedModel format."
