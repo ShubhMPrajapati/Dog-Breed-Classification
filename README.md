@@ -58,12 +58,12 @@ source venv/bin/activate
 Windows
 venv\Scripts\activate
 
-3. Running the Flask App
+# 3. Running the Flask App
 python app.py
 Open your browser and go to: http://127.0.0.1:5000/
 
 
-# Model Training
+## Model Training
 - **Dataset:** 10K+ dog images ([Kaggle Dog Breed Identification](https://www.kaggle.com/c/dog-breed-identification))  
 - **Model:** MobileNetV2 feature extractor + Dense output layer (120 classes)  
 - **Loss:** `categorical_crossentropy`  
@@ -73,7 +73,7 @@ Open your browser and go to: http://127.0.0.1:5000/
   - Early stopping and TensorBoard callbacks implemented  
 - **Saved model formats:** `.keras`, `.h5`  
 
-# Visualizing Predictions
+## Visualizing Predictions
 - Visualize first 25 training images with labels  
 - Plot predictions and top-10 probabilities for each image  
 - **Color coding:**  
