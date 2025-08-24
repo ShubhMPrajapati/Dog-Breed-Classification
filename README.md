@@ -45,7 +45,7 @@ Dog-Vision/
 
 ## Installation
 
-1. **Clone the repo:**
+# 1. **Clone the repo:**
 ```bash
 git clone [https://github.com/<your-username>/Dog-Vision.git](https://github.com/ShubhMPrajapati/Dog-Breed-Classification)
 cd Dog-Vision
