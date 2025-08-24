@@ -83,6 +83,8 @@
       font-weight: bold;
       transition: all 0.3s ease;
       font-size: 0.95rem;
+      max-width: 100%;
+      width: auto;
     }
 
     .custom-file-upload:hover {
@@ -101,6 +103,8 @@
       cursor: pointer;
       transition: all 0.3s ease;
       font-size: 0.95rem;
+      max-width: 100%;
+      width: auto;
     }
 
     button:hover {
@@ -170,6 +174,8 @@
       }
       button, .custom-file-upload {
         width: 100%;
+        font-size: 1rem;
+        padding: 14px;
       }
     }
   </style>
@@ -194,7 +200,7 @@
 
       {% if prediction %}
         <h3>{{ prediction }}</h3>
-        <img src="{{ url_for('static', filename=img_path) }}" width="300">
+        <img src="data:image/jpeg;base64,{{ img_data }}" width="300">
       {% endif %}
     </div>
 
